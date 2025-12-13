@@ -13,5 +13,5 @@ RUN chmod +x /app/init-workflows.sh \
 
 USER node
 
-CMD ["/app/init-workflows.sh"]
+ENTRYPOINT ["/app/init-workflows.sh"]
 
