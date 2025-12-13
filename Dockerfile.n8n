@@ -11,6 +11,4 @@ COPY init-workflows.sh /app/init-workflows.sh
 RUN chmod +x /app/init-workflows.sh \
     && chown node:node /app/init-workflows.sh
 
-USER node
 CMD ["/app/init-workflows.sh"]
-
