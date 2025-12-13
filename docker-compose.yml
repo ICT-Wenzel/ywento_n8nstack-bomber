@@ -1,0 +1,13 @@
+services:
+  streamlit:
+    build: .
+    container_name: streamlit-app
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - streamlit_data:/app/data
+    restart: always
+volumes:
+  streamlit_data:
