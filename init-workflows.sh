@@ -16,13 +16,7 @@ else
   git clone "${GITHUB_URL}" "${work_dir}"
 fi
 
-# Zielordner für n8n Workflows sicherstellen
-mkdir -p "$workflow_dir"
-
-# Workflow-Dateien direkt kopieren
-cp "$work_dir"/*.json "$workflow_dir"/
-
-for file in "$workflow_dir"/*.json; do
+for file in "$work_dir"/*.json; do
     if grep -q '"name"' "$file"; then
         n8n import:workflow --input="$file"
     else
