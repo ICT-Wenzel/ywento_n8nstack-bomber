@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e 
 ENV_FILE="./.env"
 
@@ -22,7 +24,7 @@ fi
 
 pip install -r "$app_dir/requirements.txt"
 
-streamlit run "$app_dir/app.py" \
+exec streamlit run "$app_dir/app.py" \
     --server.port=8501 \
     --server.address=0.0.0.0 \
     --server.headless=true \
