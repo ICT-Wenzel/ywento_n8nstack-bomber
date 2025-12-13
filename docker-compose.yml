@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile.n8n
       args:
-        - GITHUB_URL_n8n=${GITHUB_URL_n8n}
+        - GITHUB_URL=${GITHUB_URL}
     image: docker.n8n.io/n8nio/n8n
     restart: always
     environment:
