@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+COPY startup.sh /app/startup.sh
+RUN chmod +x /app/startup.sh
 
 
-CMD ["/app/start.sh"]
+CMD ["/app/startup.sh"]
 
