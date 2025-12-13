@@ -6,7 +6,7 @@ if [ -z "${GITHUB_URL}" ]; then
   exit 1
 fi
 
-work_dir="/n8nworkflows"
+work_dir="/home/node/.n8n"
 workflow_dir="/home/node/.n8n/workflows"
 
 if [ -d "${work_dir}/.git" ]; then
