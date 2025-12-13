@@ -15,6 +15,6 @@ else
   git clone "${GITHUB_URL}" "${work_dir}"
 fi
 
-n8n import:workflow --input="${work_dir}/workflow.json" --overwrite
+n8n import:workflow --input="${work_dir}/workflow.json"
 
 exec n8n
