@@ -22,7 +22,7 @@ fi
 
 pip install -r "$app_dir/requirements.txt"
 
-exec streamlit run "$app_dir/app.py" \
+streamlit run "$app_dir/app.py" \
     --server.port=8501 \
     --server.address=0.0.0.0 \
     --server.headless=true \
