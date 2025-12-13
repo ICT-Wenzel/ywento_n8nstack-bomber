@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e 
-ENV_FILE="./.env"
+ENV_FILE=".env"
 
 if [ -f "$ENV_FILE" ]; then
   export $(cat "$ENV_FILE" | xargs)
