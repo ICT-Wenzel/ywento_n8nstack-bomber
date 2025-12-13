@@ -5,10 +5,12 @@ ENV GITHUB_URL=${GITHUB_URL}
 USER root
 RUN apk add --no-cache curl
 
-COPY init-workflows.sh /init-workflows.sh
-RUN chmod +x /init-workflows.sh \
-    && chown node:node /init-workflows.sh
+WORKDIR /app
+
+COPY init-workflows.sh /app/init-workflows.sh
+RUN chmod +x /app/init-workflows.sh \
+    && chown node:node /app/init-workflows.sh
 
 USER node
-CMD ["/init-workflows.sh"]
+CMD ["/app/init-workflows.sh"]
 
