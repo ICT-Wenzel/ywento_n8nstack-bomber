@@ -22,16 +22,12 @@ mkdir -p "$workflow_dir"
 # Workflow-Dateien direkt kopieren
 cp "$work_dir"/*.json "$workflow_dir"/
 
-# Workflow importieren
 for file in "$workflow_dir"/*.json; do
-    # Prüfen, ob die Datei ein "name" Feld hat
     if grep -q '"name"' "$file"; then
-        echo "Importing $file..."
-        n8n import:workflow --input="$file" --overwrite
+        n8n import:workflow --input="$file"
     else
         echo "Skipping $file: missing name field"
     fi
 done
 
-# n8n starten
 exec n8n
