@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - streamlit_data:/app/data
+      - streamlit_data:/app
     restart: always
 volumes:
   streamlit_data:
