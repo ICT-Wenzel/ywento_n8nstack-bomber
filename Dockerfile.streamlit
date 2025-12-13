@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY startup.sh /app/startup_streamlit.sh
+COPY startup_streamlit.sh /app/startup_streamlit.sh
 RUN chmod +x /app/startup_streamlit.sh
 
 CMD ["/app/startup_streamlit.sh"]
