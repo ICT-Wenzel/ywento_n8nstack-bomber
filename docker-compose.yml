@@ -1,11 +1,12 @@
 services:
   streamlit:
-    build: .
+    build:
+      context: .
+      args:
+        GITHUB_URL: ${GITHUB_URL}
     container_name: streamlit-app
     ports:
       - "8501:8501"
-    env_file:
-      - .env
     volumes:
       - streamlit_data:/app
     restart: always

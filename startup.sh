@@ -1,16 +1,9 @@
 #!/bin/bash
 
 set -e 
-ENV_FILE=".env"
-
-if [ -f "$ENV_FILE" ]; then
-  export $(cat "$ENV_FILE" | xargs)
-fi
-
-GITHUB_URL=$(grep -E '^GITHUB_URL=' "$ENV_FILE" | cut -d '=' -f2-)
 
 if [ -z "$GITHUB_URL" ]; then
-  echo "GITHUB_URL is not set in $ENV_FILE"
+  echo "GITHUB_URL is not set as environment variable"
   exit 1
 fi
 
