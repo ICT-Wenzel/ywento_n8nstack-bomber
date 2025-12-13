@@ -8,6 +8,7 @@ fi
 
 work_dir="/home/node/.n8n/n8nworkflows"
 workflow_dir="/home/node/.n8n/workflows"
+workfloqw_file="${workflow_dir}/workflow.json"
 
 # Clone oder pull
 if [ -d "${work_dir}/.git" ]; then
@@ -16,12 +17,7 @@ else
   git clone "${GITHUB_URL}" "${work_dir}"
 fi
 
-for file in "$work_dir"/*.json; do
-    if grep -q '"name"' "$file"; then
-        n8n import:workflow --input="$file"
-    else
-        echo "Skipping $file: missing name field"
-    fi
-done
+n8n import:workflow --input="$workflow_file"
+
 
 exec n8n
