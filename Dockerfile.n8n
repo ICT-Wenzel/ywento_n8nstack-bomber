@@ -1,0 +1,14 @@
+FROM docker.n8n.io/n8nio/n8n:latest
+ARG GITHUB_URL
+ENV GITHUB_URL=${GITHUB_URL}
+
+USER root
+RUN apk add --no-cache curl
+
+COPY init-workflows.sh /init-workflows.sh
+RUN chmod +x /init-workflows.sh \
+    && chown node:node /init-workflows.sh
+
+USER node
+CMD ["/init-workflows.sh"]
+

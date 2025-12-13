@@ -17,6 +17,8 @@ fi
 
 pip install -r "$app_dir/requirements.txt"
 
+echo "$WEBHOOK_URL" > "$app_dir/.env"
+
 exec streamlit run "$app_dir/app.py" \
     --server.port=8501 \
     --server.address=0.0.0.0 \
