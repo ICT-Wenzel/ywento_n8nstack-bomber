@@ -26,8 +26,8 @@ if [ -f "${work_dir}/workflow.json" ]; then
   cp "${work_dir}/workflow.json" "${temp_import}/"
   
   echo "Importiere workflow..."
-  n8n import:workflow --separate --input="${temp_import}"
-  
+  n8n import:workflow --separate --overwrite --input="${temp_import}"
+
   rm -rf "${temp_import}"
   echo "✓ Import abgeschlossen"
 fi
