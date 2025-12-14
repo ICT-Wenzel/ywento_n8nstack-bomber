@@ -18,6 +18,6 @@ n8n &
 N8N_PID=$!
 
 sleep 10
-n8n import:workflow --input=/home/node/.n8n/n8nworkflows/workflow.json --overwrite
+n8n import:workflow --separate --overwrite --input=/home/node/.n8n/n8nworkflows/workflow.json
 
 wait $N8N_PID
