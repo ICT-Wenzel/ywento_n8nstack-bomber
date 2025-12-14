@@ -9,7 +9,6 @@ fi
 work_dir="/home/node/.n8n/n8nworkflows"
 temp_import="/tmp/n8n_import"
 
-# Clone oder pull
 if [ -d "${work_dir}/.git" ]; then
   git -C "${work_dir}" pull
 else
@@ -19,7 +18,6 @@ fi
 n8n &
 N8N_PID=$!
 
-echo "Warte auf n8n-Start..."
 sleep 10
 
 if [ -f "${work_dir}/workflow.json" ]; then
@@ -34,5 +32,4 @@ if [ -f "${work_dir}/workflow.json" ]; then
   echo "✓ Import abgeschlossen"
 fi
 
-echo "n8n läuft (PID: $N8N_PID)"
 wait $N8N_PID
