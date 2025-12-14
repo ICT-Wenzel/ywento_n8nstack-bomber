@@ -7,17 +7,17 @@ if [ -z "${GITHUB_URL}" ]; then
 fi
 
 work_dir="/home/node/.n8n/n8nworkflows"
-workflow_dir="/home/node/.n8n/workflows"
-workfloqw_file="${workflow_dir}/workflow.json"
 
-# Clone oder pull
 if [ -d "${work_dir}/.git" ]; then
   git -C "${work_dir}" pull
 else
   git clone "${GITHUB_URL}" "${work_dir}"
 fi
 
-n8n import:workflow --input="$workflow_file"
+n8n &
+N8N_PID=$!
 
+sleep 10
+n8n import:workflow --input=/home/node/.n8n/n8nworkflows/workflow.json
 
-exec n8n
+wait $N8N_PID
