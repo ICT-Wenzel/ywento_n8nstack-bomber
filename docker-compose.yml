@@ -7,6 +7,8 @@ services:
         - GITHUB_URL=${GITHUB_URL}
     image: docker.n8n.io/n8nio/n8n
     restart: always
+    ports:
+      - "5678:5678"
     environment:
       - N8N_HOST=localhost
       - N8N_PORT=5678
