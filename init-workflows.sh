@@ -9,27 +9,32 @@ fi
 work_dir="/home/node/.n8n/n8nworkflows"
 temp_import="/tmp/n8n_import"
 
+# Git Repository synchronisieren
 if [ -d "${work_dir}/.git" ]; then
+  echo "Aktualisiere Repository..."
   git -C "${work_dir}" pull
 else
+  echo "Clone Repository..."
   git clone "${GITHUB_URL}" "${work_dir}"
 fi
 
-n8n &
-N8N_PID=$!
-
-sleep 10
-
-if [ -f "${work_dir}/workflow.json" ]; then
-  echo "Bereite Import vor..."
-  mkdir -p "${temp_import}"
-  cp "${work_dir}/workflow.json" "${temp_import}/"
-  
-  echo "Importiere workflow..."
-  n8n import:workflow --separate --overwrite --input="${temp_import}"
-
-  rm -rf "${temp_import}"
-  echo "✓ Import abgeschlossen"
+# Prüfen ob workflow.json existiert
+if [ ! -f "${work_dir}/workflow.json" ]; then
+  echo "Keine workflow.json gefunden, starte n8n normal..."
+  exec n8n
 fi
 
-wait $N8N_PID
+# Import VOR dem Start von n8n
+echo "Bereite Import vor..."
+mkdir -p "${temp_import}"
+cp "${work_dir}/workflow.json" "${temp_import}/"
+
+echo "Importiere Workflows..."
+n8n import:workflow --separate --input="${temp_import}"
+
+rm -rf "${temp_import}"
+echo "✓ Import abgeschlossen"
+
+# Jetzt n8n starten
+echo "Starte n8n..."
+exec n8n
