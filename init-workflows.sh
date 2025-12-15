@@ -59,23 +59,13 @@ if [ -f "${workflow_file}" ]; then
   if [ "${current_hash}" != "${last_hash}" ]; then
     log "Änderung an workflow.json erkannt (oder erster Import) – importiere Workflows ..."
 
-    max_retries=3
-    import_ok=0
-
-    for attempt in $(seq 1 "${max_retries}"); do
-      if n8n import:workflow --input="${workflow_file}"; then
-        import_ok=1
-        break
-      fi
-      log "Workflow-Import fehlgeschlagen (Versuch ${attempt}/${max_retries}), warte 5 Sekunden und versuche es erneut..."
-      sleep 5
-    done
-
-    if [ "${import_ok}" -eq 1 ]; then
+    if n8n import:workflow --input="${workflow_file}"; then
       log "✓ Workflow-Import erfolgreich abgeschlossen"
       printf '%s\n' "${current_hash}" > "${import_state_file}" || log "Warnung: Konnte Import-Status nicht schreiben"
     else
-      log "Fehler beim Importieren der Workflows nach ${max_retries} Versuchen (n8n läuft trotzdem weiter)"
+      log "Fehler beim Importieren der Workflows (möglicherweise bekannter n8n-Webhook-Fehler)."
+      log "Markiere workflow.json trotzdem als importiert, um wiederholte Importe zu vermeiden – bitte Ergebnis im n8n-Editor prüfen."
+      printf '%s\n' "${current_hash}" > "${import_state_file}" || log "Warnung: Konnte Import-Status nicht schreiben"
     fi
   else
     log "workflow.json unverändert – Überspringe Import"
