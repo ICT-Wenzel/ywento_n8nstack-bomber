@@ -1,20 +1,16 @@
 FROM docker.n8n.io/n8nio/n8n:latest
-
 ARG GITHUB_URL
 ENV GITHUB_URL=${GITHUB_URL}
 
 USER root
+RUN apk add --no-cache curl
 
-# Git UND curl für Health-Check
-RUN apk add --no-cache git curl
+WORKDIR /app
 
 COPY init-workflows.sh /app/init-workflows.sh
 RUN chmod +x /app/init-workflows.sh \
-    && chown node:node /app/init-workflows.sh \
-    && mkdir -p /home/node/.n8n/n8nworkflows \
-    && chown -R node:node /home/node/.n8n
+    && chown node:node /app/init-workflows.sh
 
 USER node
-WORKDIR /home/node
 
-ENTRYPOINT ["/app/init-workflows.sh"]
+CMD ["/app/init-workflows.sh"]
